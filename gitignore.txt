@@ -1,5 +1,0 @@
-.eventif
-*.sqlite3
-__pycache__
-.env
-staticfiles
