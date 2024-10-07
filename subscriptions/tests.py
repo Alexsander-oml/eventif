@@ -65,9 +65,9 @@ class subscribePostTest(TestCase):
         
 class SubscribeInvalidPost(TestCase):
     def setUp(self)
-    
+         self.resp = self.client.post('/inscricao/', {})
     def test_post(self):
-        resp = self.client.post('/inscricao/', {})
+        
         self.assertEqual(200, resp.status_code)
     
     def test_template(self):
