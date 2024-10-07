@@ -64,7 +64,21 @@ class subscribePostTest(TestCase):
         self.assertContains('53-1234-1234', email.body)
         
 class SubscribeInvalidPost(TestCase):
+    def setUp(self)
+    
     def test_post(self):
         resp = self.client.post('/inscricao/', {})
-        self.assertEqual(202, resp.status_code)
+        self.assertEqual(200, resp.status_code)
+    
+    def test_template(self):
+        self.assertTemplateused(self.respm 'subscriptions/subscription_form.html')
+        
+    def test_has_form(self):
+        form = self.resp.context['form']
+        self.assertIsInstance(form, SubscriptionForm)
+        
+    def test_form_has_error(self):
+        form - self.resp.context['form']
+        self.assertTrue(form.errors)
+
 
