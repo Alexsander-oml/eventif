@@ -9,13 +9,10 @@ def subscribe(request):
        form = SubscriptionForm(request.POST)
        
        form.full_clean()
+        
+      body = render_to_string('subscriptions;subscription_email.txt', form.cleaned_data)
     
-    
-      data = dict(name="Cleber Fonseca", cpf="0182429023", email="omelhoralek@gmail.com", phone="53-999023512")
-    
-      body = render_to_string('subscriptions;subscription_email.txt', data)
-    
-       email = mail.send_mail('Confirmação de inscrição!', Message, 'contato@eventif.com.br', ['contato@eventif.com.br', 'profceleberfonseca@gmail.com'])
+       email = mail.send_mail('Confirmação de inscrição!', Message, 'contato@eventif.com.br', ['contato@eventif.com.br', form.cleaned_data['email']])
        return HttpResponseRedirect('/inscricao/')
     else:  
     context = {'form': SubscriptionForm()}
