@@ -57,9 +57,14 @@ class subscribePostTest(TestCase):
         self.assertEqual(expect, email.to)
         
     def test_subscription_email_body(self):
-        email = mail.outbox[0]
+        email = mail.odict(name="Cleber Fonseca", cpf="0182429023", email="omelhoralek@gmail.com", phone="53-999023512")utbox[0]
         self.assertContains('Celeber Fonseca', email.body)
         self.assertContains('12345678901', email.body)
         self.assertContains('profcleberfonseca@gmail.com', email.body)
         self.assertContains('53-1234-1234', email.body)
+        
+class SubscribeInvalidPost(TestCase):
+    def test_post(self):
+        resp = self.client.post('/inscricao/', {})
+        self.assertEqual(202, resp.status_code)
 
