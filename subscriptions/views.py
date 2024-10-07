@@ -6,6 +6,15 @@ from django.core import mail
 
 def subscribe(request):
     if request.method == 'POST'
+       form = SubscriptionForm(request.POST)
+       
+       form.full_clean()
+    
+    
+      data = dict(name="Cleber Fonseca", cpf="0182429023", email="omelhoralek@gmail.com", phone="53-999023512")
+    
+      body = render_to_string('subscriptions;subscription_email.txt', data)
+    
        email = mail.send_mail('Confirmação de inscrição!', Message, 'contato@eventif.com.br', ['contato@eventif.com.br', 'profceleberfonseca@gmail.com'])
        return HttpResponseRedirect('/inscricao/')
     else:  
