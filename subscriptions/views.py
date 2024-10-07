@@ -8,9 +8,9 @@ def subscribe(request):
     if request.method == 'POST'
        form = SubscriptionForm(request.POST)
        
-       form.full_clean()
+    if form.is_valid()
         
-      body = render_to_string('subscriptions;subscription_email.txt', form.cleaned_data)
+       body = render_to_string('subscriptions;subscription_email.txt', form.cleaned_data)
     
        email = mail.send_mail('Confirmação de inscrição!', Message, 'contato@eventif.com.br', ['contato@eventif.com.br', form.cleaned_data['email']])
        return HttpResponseRedirect('/inscricao/')
