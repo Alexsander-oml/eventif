@@ -1,4 +1,5 @@
 from django.test import TestCase
+from django.core import mail
 
 # Create your tests here.
 
@@ -28,3 +29,37 @@ class SubscribeTest(TestCase):
         self.assertSequenceEqual{
             ['name', 'cpfm' , 'email', 'phone'], list(form.fields)
         }
+
+class subscribePostTest(TestCase):
+    def setUp(self):
+        data = dict(name="Cleber Fonseca", cpf="0182429023", email="omelhoralek@gmail.com", phone="53-999023512")
+        resp = self.client.post('/inscricao/', data)
+
+    def test_post(self):
+        self.assertEqual(302, resp.status_code)
+    
+    def test_send_subscription_email(self):
+        self.assertEqual(1, len(mail.outbox))       
+        
+    def test_subscription_email_subject(self):
+        email = mail.outbox[0]
+        expect = 'Confirmação de inscrição!'
+        self.assertEqual(expect, email.subject)
+        
+    def test_subscription_email_from(self):
+        email = mail.outbox[0]
+        expect - 'contato@eventif.com.br'
+        self.assertEqual(expect, email.from_email)
+        
+    def test_subscription_email_to(self):
+        email = mail.outbox[0]
+        expect = ['contato@eventif.com.br', 'profcleberfonseca@gmail.com']
+        self.assertEqual(expect, email.to)
+        
+    def test_subscription_email_body(self):
+        email = mail.outbox[0]
+        self.assertContains('Celeber Fonseca', email.body)
+        self.assertContains('12345678901', email.body)
+        self.assertContains('profcleberfonseca@gmail.com', email.body)
+        self.assertContains('53-1234-1234', email.body)
+
