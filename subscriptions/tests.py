@@ -4,7 +4,7 @@ from subscriptions.forms import SubscriptionForm
 
 
 class SubscribeTest(TestCase):
-@@ -26,3 +28,66 @@ def test_has_form(self):
+    def test_has_form(self):
         form = self.response.context['form']
         self.assertSequenceEqual(
             ['name', 'cpf', 'email', 'phone'], list(form.fields))
