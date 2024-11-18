@@ -5,10 +5,10 @@ Muito obrigado por se inscrever no Eventif.
 Estes foram os dados que você enviou na sua
 inscrição.
 
-Nome: {{ Name }}
-CPF: {{ CPF }}
-Email: {{ Email }}
-Telefone: {{ Telefone }}
+Nome: {{ subscription.name }}
+CPF: {{ subscription.cpf }}
+Email: {{ subscription.email }}
+Telefone: {{ subscription.phone }}
 
 Em até 48h úteis alguem da nossa equipe entrará
 em contato com você para concluirmos a sua 

@@ -2,7 +2,7 @@ from django.test import TestCase
 from django.core import mail
 from subscriptions.forms import SubscriptionForm
 from subscriptions.models import Subscription
-
+import unittest
 
 
 class SubscribeGet(TestCase):
@@ -21,8 +21,8 @@ class SubscribeGet(TestCase):
             ('<form', 1),
             ('<input', 6),
             ('type="text"', 3),
-            ('type="email"',1),
-            ('type="submit"',1)
+            ('type="email"', 1),
+            ('type="submit"', 1)
         )
         for text, count in tags:
             with self.subTest():
@@ -39,7 +39,7 @@ class SubscribePostValid(TestCase):
         self.resp = self.client.post('/inscricao/', data)
 
     def test_post(self):
-        self.assertEqual(302, self.resp.status_code)
+        self.assertRedirects(self.resp, '/inscricao/1/')
 
     def test_send_subscription_email(self):
         self.assertEqual(1, len(mail.outbox))
@@ -69,11 +69,3 @@ class SubscribePostInvalid(TestCase):
 
     def test_dont_save_subscription(self):
         self.assertFalse(Subscription.objects.exists())
-
-
-class SubscribeSuccessMessage(TestCase):
-    def test_message(self):
-        data = dict(name="Cleber Fonseca", cpf='12345678901',
-                    email='profcleberfonseca@gmail.com', phone='53-12345-6789')
-        resp = self.client.post('/inscricao/', data, follow=True)
-        self.assertContains(resp, 'Inscrição realizada com sucesso!') 
