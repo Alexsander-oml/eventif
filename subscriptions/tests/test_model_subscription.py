@@ -1,15 +1,14 @@
-from django.test import TestCase
 from datetime import datetime
+from django.test import TestCase
 from subscriptions.models import Subscription
-
 
 class SubscriptionModelTest(TestCase):
     def setUp(self):
         self.obj = Subscription(
-            name='Cleber Fonseca',
-            cpf='12345678901',
-            email='profcleberfonseca@gmail.com',
-            phone='53-12345-6789'
+            name = 'Cleber Fonseca',
+            cpf = '12345678901',
+            email = 'profcleberfonseca@gmail.com',
+            phone = '53912345678'
         )
         self.obj.save()
 
@@ -21,3 +20,6 @@ class SubscriptionModelTest(TestCase):
 
     def test_str(self):
         self.assertEqual('Cleber Fonseca', str(self.obj))
+
+    def tset_paid_default_false(self):
+        self.assertEqual(False, self.obj.paid)
