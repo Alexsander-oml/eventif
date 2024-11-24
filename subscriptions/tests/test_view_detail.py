@@ -1,37 +1,34 @@
 from django.test import TestCase
+
 from subscriptions.models import Subscription
 
-
-class SubscriptionDetailGet(TestCase):
+class SubscriptionGetDetail(TestCase):
     def setUp(self):
-        obj = Subscription.objects.create(
-            name='Cleber Fonseca',
+        self.obj = Subscription.objects.create(
+            name='Pedro Machado',
             cpf='12345678901',
-            email='profcleberfonseca@gmail.com',
-            phone='53-91234-5678'
+            email='pedro.machado@mail.com',
+            phone='53 91234-5678'
         )
-        self.resp = self.client.get('/inscricao/{}/'.format(obj.pk))
+        self.resp = self.client.get('/inscricao/{}/'.format(self.obj.pk))
 
     def test_get(self):
         self.assertEqual(200, self.resp.status_code)
-
+    
     def test_template(self):
-        self.assertTemplateUsed(self.resp,
-                                'subscriptions/subscription_detail.html')
+        self.assertTemplateUsed(self.resp, 'subscriptions/subscription_detail.html')
 
     def test_context(self):
-        subscription = self.resp.context['subscription']
-        self.assertIsInstance(subscription, Subscription)
+        sub = self.resp.context['subscription']
+        self.assertIsInstance(sub, Subscription)
 
     def test_html(self):
-        contents = ('Cleber Fonseca', '12345678901',
-                    'profcleberfonseca@gmail.com', '53-91234-5678')
-        with self.subTest():
-            for expected in contents:
-                self.assertContains(self.resp, expected)
-
+        contents = (self.obj.name, self.obj.cpf, self.obj.email, self.obj.phone)
+        for expect in contents:
+            with self.subTest():
+                self.assertContains(self.resp, expect)
 
 class SubscriptionDetailNotFound(TestCase):
     def test_not_found(self):
         resp = self.client.get('/inscricao/0/')
-        self.assertEqual(resp.status_code, 404)
+        self.assertEqual(404, resp.status_code)
