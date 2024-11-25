@@ -9,8 +9,8 @@ class ContactFormTest(TestCase):
         self.assertTupleEqual(tuple(form.fields), ('name', 'email', 'phone', 'message'))
 
     def test_name_must_be_capitalized(self):
-        form = self.make_validated_form(name='PEDRO machado')
-        self.assertEqual(form.cleaned_data['name'], 'Pedro Machado')
+        form = self.make_validated_form(name='ALEX santos')
+        self.assertEqual(form.cleaned_data['name'], 'Alex Santos')
 
     def test_phone_is_optional(self):
         form = self.make_validated_form(phone='')
@@ -18,9 +18,9 @@ class ContactFormTest(TestCase):
 
     def make_validated_form(self, **kwargs):
         valid = dict(
-            name='Pedro Machado',
-            email='pedro.machado@mail.com',
-            phone='053-98429-5133',
+            name='Alex Santos',
+            email='alex.santos@mail.com',
+            phone='053-91234-5678',
             message='Lorem ipsum dolor sit amet',
         )
         data = dict(valid, **kwargs)
