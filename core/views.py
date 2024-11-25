@@ -1,5 +1,8 @@
 from django.shortcuts import render
 
-# Create your views here.
 def home(request):
-    return render(request, 'index.html')
+    speakers = [
+        {'name': 'Grace Hopper', 'photo': 'https://cleberfonseca.com.br/img/hopper.jpeg'},
+        {'name': 'Alan Turing', 'photo': 'https://cleberfonseca.com.br/img/turing.jpeg'}
+    ]
+    return render(request, 'index.html', {'speakers': speakers})
