@@ -1,4 +1,5 @@
 from django.test import TestCase
+
 from subscriptions.forms import SubscriptionForm
 
 
@@ -44,9 +45,9 @@ class SubscriptionFormTest(TestCase):
 
     def make_validated_form(self, **kwargs):
         valid = dict(
-            name='Alex Santos',
+            name='Pedro Machado',
             cpf='12345678901',
-            email='alek@mail.com',
+            email='pedro@mail.com',
             phone='53-91234-5678',
         )
         data = dict(valid, **kwargs)
