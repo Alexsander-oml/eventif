@@ -2,9 +2,15 @@ from django.test import TestCase
 from django.core import mail
 from django.shortcuts import resolve_url as r
 
+
 class MailTest(TestCase):
     def setUp(self):
-        data = dict(name='Alex Santos', cpf='12345678901', email='alex.santos@mail.com', phone='53 91234-5678')
+        data = dict(
+            name='Pedro Machado',
+            cpf='12345678901',
+            email='pedro.machado@mail.com',
+            phone='53 91234-5678',
+        )
         self.response = self.client.post(r('subscriptions:new'), data)
         self.email = mail.outbox[0]
 
@@ -17,11 +23,16 @@ class MailTest(TestCase):
         self.assertEqual(expect, self.email.from_email)
 
     def test_subscription_email_to(self):
-        expect = ['contato@eventif.com.br', 'alex.santos@mail.com']
+        expect = ['contato@eventif.com.br', 'pedro.machado@mail.com']
         self.assertEqual(expect, self.email.to)
 
     def test_subscription_email_body(self):
-        contents = ('Alex Santos', '12345678901', 'alex.santos@mail.com', '53 91234-5678')
+        contents = (
+            'Alex Santtos',
+            '12345678901',
+            'alex.santos@mail.com',
+            '53 91234-5678',
+        )
         for content in contents:
             with self.subTest():
                 self.assertIn(content, self.email.body)
