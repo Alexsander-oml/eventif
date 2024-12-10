@@ -5,9 +5,9 @@
         "fields": {
             "name": "Grace Hopper",
             "slug": "grace-hopper",
-            "photo": "https://cleberfonseca.com.br/img/hopper.jpeg",
-            "website": "https://pt.wikipedia.org/wiki/Grace_Hopper",
-            "description": "Programadora e almirante.\r\nInventora do compilador, criadora da linguagem de programação Flow-Matic que serviu de base para a linguagem COBOL permitindo a popularização das aplicações comerciais."
+            "photo": "https://abre.ai/hopper-pic",
+            "website": "https://abre.ai/hopper-site",
+            "description": "Programadora e almirante."
         }
     },
     {
@@ -16,9 +16,9 @@
         "fields": {
             "name": "Alan Turing",
             "slug": "alan-turing",
-            "photo": "https://cleberfonseca.com.br/img/turing.jpeg",
-            "website": "https://pt.wikipedia.org/wiki/Alan_Turing",
-            "description": "Matemático e decifrador de códigos.\r\nInventou o computador moderno, formalizou matematicamente o que é algoritmo e de quebra salvou o mundo como conhecemos ao destroçar a criptografia nazista."
+            "photo": "https://abre.ai/turing-pic",
+            "website": "https://abre.ai/turing-site",
+            "description": "Matemático e decifrador de códigos.\r\nInventou o computador moderno, formalizou matematicamente o que é um algoritmo e de quebra salvou o mundo ao acabar com a criptografia dos nazistas."
         }
     }
     ]
